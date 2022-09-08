@@ -6,6 +6,7 @@ package tests
 import (
 	"testing"
 
+	"github.com/asydevc/log/v2"
 	"github.com/asydevc/sdk"
 )
 
