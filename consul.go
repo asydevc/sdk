@@ -9,6 +9,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/asydevc/log/v2"
 	"github.com/hashicorp/consul/api"
 )
 
