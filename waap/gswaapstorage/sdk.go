@@ -10,5 +10,5 @@ const (
 
 // 攻击日志存储
 func LogAttack(ctx interface{}, body interface{}) *sdk.ClientResponse {
-	return sdk.NewHttp(Name).SetRoute("/log/attack").SetBody(body).Run(ctx)
+	return sdk.NewHttp(Name).SetRoute("/logs/attack").SetBody(body).Run(ctx)
 }
