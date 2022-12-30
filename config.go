@@ -5,7 +5,7 @@ package sdk
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
 
 	"gopkg.in/yaml.v3"
 )
@@ -50,7 +50,7 @@ type configuration struct {
 	ServiceUserAgent string `yaml:"-"`
 }
 
-// Load defaults.
+// LoadDefault Load defaults.
 func (o *configuration) LoadDefault() {
 	if o.ConsulAddress == "" {
 		o.ConsulAddress = DefaultConsulAddress
@@ -81,9 +81,9 @@ func (o *configuration) LoadDefault() {
 	}
 }
 
-// Load config from yaml file.
+// LoadYaml Load config from yaml file.
 func (o *configuration) LoadYaml(file string) error {
-	body, err := ioutil.ReadFile(file)
+	body, err := os.ReadFile(file)
 	if err != nil {
 		return err
 	}
@@ -93,9 +93,9 @@ func (o *configuration) LoadYaml(file string) error {
 	return nil
 }
 
-// Load app config from yaml file.
+// LoadYamlApp Load app config from yaml file.
 func (o *configuration) LoadYamlApp(file string) error {
-	body, err := ioutil.ReadFile(file)
+	body, err := os.ReadFile(file)
 	if err != nil {
 		return err
 	}
@@ -115,12 +115,12 @@ func (o *configuration) LoadYamlApp(file string) error {
 
 // Initialize configuration.
 func (o *configuration) initialize() {
-	for _, file := range []string{"./tmp/sdk.yaml", "../tmp/sdk.yaml", "./config/sdk.yaml", "../config/sdk.yaml"} {
+	for _, file := range []string{"./tmp/sdk.yaml", "../tmp/sdk.yaml", "./config/sdk.yaml", "../config/sdk.yaml", "../../configs/sdk.yaml"} {
 		if o.LoadYaml(file) == nil {
 			break
 		}
 	}
-	for _, file := range []string{"./tmp/app.yaml", "../tmp/app.yaml", "./config/app.yaml", "../config/app.yaml"} {
+	for _, file := range []string{"./tmp/app.yaml", "../tmp/app.yaml", "./config/app.yaml", "../config/app.yaml", "../../configs/app.yaml"} {
 		if o.LoadYamlApp(file) == nil {
 			break
 		}
